@@ -1,23 +1,22 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
-import { ThemeProvider } from "next-themes";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
-
-export const metadata: Metadata = {
-  metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
-};
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  display: "swap",
   subsets: ["latin"],
 });
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "NaijaLaughs — Same News. More Wahala.",
+  description:
+    "Naija news, Africa, world stories, entertainment, jobs and everyday wahala — presented with a Nigerian sense of humour.",
+};
 
 export default function RootLayout({
   children,
@@ -25,16 +24,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.className} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+    <html lang="en" data-scroll-behavior="smooth">
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        {children}
       </body>
     </html>
   );
